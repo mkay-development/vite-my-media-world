@@ -1,4 +1,4 @@
-# Docker - pwa-template.de
+# Docker - my-media-world.de
 
 ## Techstack:
 - VueJs
