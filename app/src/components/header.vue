@@ -19,12 +19,12 @@
 </template>
 
 <script setup>
-import { storeToRefs } from "pinia";
-import { useUserStore } from "@/store/user";
-import { onMounted } from "vue";
-let store = useUserStore();
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/store/user';
+import { onMounted } from 'vue';
+const store = useUserStore();
 
-let { loggedin } = storeToRefs(store);
+const { loggedin } = storeToRefs(store);
 
 onMounted(function () {
   store.check();

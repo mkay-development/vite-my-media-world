@@ -12,19 +12,19 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
-import MovieCard from "@/components/movie/card.vue";
-import SeriesCard from "@/components/series/card.vue";
+import { onMounted, ref } from 'vue';
+import MovieCard from '@/components/movie/card.vue';
+import SeriesCard from '@/components/series/card.vue';
 
-let items = ref([]);
+const items = ref([]);
 
-let load = function () {
-  fetch("https://backend.my-media.world/api/rack/records", {
-    method: "GET",
+const load = function () {
+  fetch('https://backend.my-media.world/api/rack/records', {
+    method: 'GET',
     headers: {
-      Authorization: "Bearer: " + localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
+      Authorization: 'Bearer: ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
   })
     .then(function (response) {
       return response.json();

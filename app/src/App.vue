@@ -12,19 +12,19 @@
   </div>
 </template>
 <script setup>
-import { watch, onMounted } from "vue";
-import headerGeneral from "./components/header.vue";
-import footerGeneral from "./components/footer.vue";
-import { useRoute } from "vue-router";
-import { useUserStore } from "@/store/user";
+import { watch, onMounted } from 'vue';
+import headerGeneral from './components/header.vue';
+import footerGeneral from './components/footer.vue';
+import { useRoute } from 'vue-router';
+import { useUserStore } from '@/store/user';
 
-import "./tailwind.css";
+import './tailwind.css';
 
-let route = useRoute();
-let store = useUserStore();
+const route = useRoute();
+const store = useUserStore();
 
 watch(route, function () {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 onMounted(function () {

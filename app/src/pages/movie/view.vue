@@ -59,27 +59,27 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
-import { ref, onMounted, watch } from "vue";
+import { useRoute } from 'vue-router';
+import { ref, onMounted, watch } from 'vue';
 
-let item = ref({});
-let route = useRoute();
-let isOnWishlist = ref(false);
-let isOnRacklist = ref(false);
-let typ = ref("dvd");
+const item = ref({});
+const route = useRoute();
+const isOnWishlist = ref(false);
+const isOnRacklist = ref(false);
+const typ = ref('dvd');
 
 watch(typ, function () {
   onWishlist();
   onRacklist();
 });
 
-let load = function () {
-  fetch("https://backend.my-media.world/api/movie/" + route.params.id, {
-    method: "GET",
+const load = function () {
+  fetch('https://backend.my-media.world/api/movie/' + route.params.id, {
+    method: 'GET',
     headers: {
-      Authorization: "Bearer: " + localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
+      Authorization: 'Bearer: ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
   })
     .then(function (response) {
       return response.json();
@@ -89,17 +89,17 @@ let load = function () {
     });
 };
 
-let addToWishlist = function () {
-  fetch("https://backend.my-media.world/api/wishlist/add", {
-    method: "POST",
+const addToWishlist = function () {
+  fetch('https://backend.my-media.world/api/wishlist/add', {
+    method: 'POST',
     body: JSON.stringify({
       id: route.params.id,
-      typ: typ.value,
+      typ: typ.value
     }),
     headers: {
-      Authorization: "Bearer: " + localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
+      Authorization: 'Bearer: ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
   })
     .then(function (response) {
       return response.json();
@@ -110,17 +110,17 @@ let addToWishlist = function () {
     });
 };
 
-let removeFromRacklist = function () {
-  fetch("https://backend.my-media.world/api/rack/remove", {
-    method: "POST",
+const removeFromRacklist = function () {
+  fetch('https://backend.my-media.world/api/rack/remove', {
+    method: 'POST',
     body: JSON.stringify({
       id: route.params.id,
-      typ: typ.value,
+      typ: typ.value
     }),
     headers: {
-      Authorization: "Bearer: " + localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
+      Authorization: 'Bearer: ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
   })
     .then(function (response) {
       return response.json();
@@ -130,17 +130,17 @@ let removeFromRacklist = function () {
     });
 };
 
-let removeFromWishlist = function () {
-  fetch("https://backend.my-media.world/api/wishlist/remove", {
-    method: "POST",
+const removeFromWishlist = function () {
+  fetch('https://backend.my-media.world/api/wishlist/remove', {
+    method: 'POST',
     body: JSON.stringify({
       id: route.params.id,
-      typ: typ.value,
+      typ: typ.value
     }),
     headers: {
-      Authorization: "Bearer: " + localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
+      Authorization: 'Bearer: ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
   })
     .then(function (response) {
       return response.json();
@@ -151,17 +151,17 @@ let removeFromWishlist = function () {
     });
 };
 
-let addToRacklist = function () {
-  fetch("https://backend.my-media.world/api/rack/add", {
-    method: "POST",
+const addToRacklist = function () {
+  fetch('https://backend.my-media.world/api/rack/add', {
+    method: 'POST',
     body: JSON.stringify({
       id: route.params.id,
-      typ: typ.value,
+      typ: typ.value
     }),
     headers: {
-      Authorization: "Bearer: " + localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
+      Authorization: 'Bearer: ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
   })
     .then(function (response) {
       return response.json();
@@ -171,17 +171,17 @@ let addToRacklist = function () {
     });
 };
 
-let onWishlist = function () {
-  fetch("https://backend.my-media.world/api/wishlist/ison", {
-    method: "POST",
+const onWishlist = function () {
+  fetch('https://backend.my-media.world/api/wishlist/ison', {
+    method: 'POST',
     body: JSON.stringify({
       id: route.params.id,
-      typ: typ.value,
+      typ: typ.value
     }),
     headers: {
-      Authorization: "Bearer: " + localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
+      Authorization: 'Bearer: ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
   })
     .then(function (response) {
       return response.json();
@@ -191,17 +191,17 @@ let onWishlist = function () {
     });
 };
 
-let onRacklist = function () {
-  fetch("https://backend.my-media.world/api/rack/ison", {
-    method: "POST",
+const onRacklist = function () {
+  fetch('https://backend.my-media.world/api/rack/ison', {
+    method: 'POST',
     body: JSON.stringify({
       id: route.params.id,
-      typ: typ.value,
+      typ: typ.value
     }),
     headers: {
-      Authorization: "Bearer: " + localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
+      Authorization: 'Bearer: ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
   })
     .then(function (response) {
       return response.json();

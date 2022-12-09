@@ -25,15 +25,15 @@
 </template>
 
 <script setup>
-import { useUserStore } from "@/store/user";
-import { ref } from "vue";
+import { useUserStore } from '@/store/user';
+import { ref } from 'vue';
 
-let email = ref('');
-let password = ref('');
+const email = ref('');
+const password = ref('');
 
 const store = useUserStore();
 
-let submit = function () {
+const submit = function () {
   store.login(email.value, password.value);
 };
 </script>

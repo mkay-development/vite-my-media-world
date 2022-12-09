@@ -23,32 +23,32 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref } from 'vue';
 
-let item = ref({});
+const item = ref({});
 
 const props = defineProps({
   identifier: {
     require: true,
-    type: Number,
+    type: Number
   },
   typ: {
     require: true,
-    typ: String,
-  },
+    typ: String
+  }
 });
 
-let load = function () {
-  if (localStorage.getItem("movie-" + props.identifier) != null) {
-    item.value = JSON.parse(localStorage.getItem("movie-" + props.identifier));
+const load = function () {
+  if (localStorage.getItem('movie-' + props.identifier) != null) {
+    item.value = JSON.parse(localStorage.getItem('movie-' + props.identifier));
   } else {
-    fetch("https://backend.my-media.world/api/movie/" + props.identifier, {
-      method: "GET",
+    fetch('https://backend.my-media.world/api/movie/' + props.identifier, {
+      method: 'GET',
       headers: {
-        Authorization: "Bearer: " + localStorage.getItem("token"),
-        "Content-Type": "application/json",
+        Authorization: 'Bearer: ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
       },
-      item,
+      item
     })
       .then(function (response) {
         return response.json();
@@ -57,7 +57,7 @@ let load = function () {
         if (data.item) {
           item.value = data.item;
           localStorage.setItem(
-            "movie-" + props.identifier,
+            'movie-' + props.identifier,
             JSON.stringify(data.item)
           );
         }

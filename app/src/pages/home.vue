@@ -10,22 +10,22 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
-import MovieCard from "@/components/movie/card.vue";
+import { onMounted, ref } from 'vue';
+import MovieCard from '@/components/movie/card.vue';
 
-let movies = ref([]);
+const movies = ref([]);
 
 onMounted(() => {
   load();
 });
 
-let load = function () {
-  fetch("https://backend.my-media.world/api/movies/upcoming", {
-    method: "GET",
+const load = function () {
+  fetch('https://backend.my-media.world/api/movies/upcoming', {
+    method: 'GET',
     headers: {
-      Authorization: "Bearer: " + localStorage.getItem("token"),
-      "Content-Type": "application/json",
-    },
+      Authorization: 'Bearer: ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+    }
   })
     .then(function (response) {
       return response.json();
