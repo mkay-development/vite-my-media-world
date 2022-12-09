@@ -31,6 +31,7 @@
         <select v-model="typ">
           <option value="br">Blue Ray</option>
           <option value="dvd">DVD</option>
+          <option value="4k">4k</option>
         </select>
       </div>
     </div>
@@ -59,13 +60,18 @@
 
 <script setup>
 import { useRoute } from "vue-router";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 
 let item = ref({});
 let route = useRoute();
 let isOnWishlist = ref(false);
 let isOnRacklist = ref(false);
-let typ = ref('dvd');
+let typ = ref("dvd");
+
+watch(typ, function () {
+  onWishlist();
+  onRacklist();
+});
 
 let load = function () {
   fetch("https://backend.my-media.world/api/movie/" + route.params.id, {
@@ -88,6 +94,7 @@ let addToWishlist = function () {
     method: "POST",
     body: JSON.stringify({
       id: route.params.id,
+      typ: typ.value,
     }),
     headers: {
       Authorization: "Bearer: " + localStorage.getItem("token"),
@@ -108,6 +115,7 @@ let removeFromRacklist = function () {
     method: "POST",
     body: JSON.stringify({
       id: route.params.id,
+      typ: typ.value,
     }),
     headers: {
       Authorization: "Bearer: " + localStorage.getItem("token"),
@@ -127,6 +135,7 @@ let removeFromWishlist = function () {
     method: "POST",
     body: JSON.stringify({
       id: route.params.id,
+      typ: typ.value,
     }),
     headers: {
       Authorization: "Bearer: " + localStorage.getItem("token"),
@@ -147,6 +156,7 @@ let addToRacklist = function () {
     method: "POST",
     body: JSON.stringify({
       id: route.params.id,
+      typ: typ.value,
     }),
     headers: {
       Authorization: "Bearer: " + localStorage.getItem("token"),
@@ -157,7 +167,6 @@ let addToRacklist = function () {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
       isOnRacklist.value = true;
     });
 };
@@ -167,6 +176,7 @@ let onWishlist = function () {
     method: "POST",
     body: JSON.stringify({
       id: route.params.id,
+      typ: typ.value,
     }),
     headers: {
       Authorization: "Bearer: " + localStorage.getItem("token"),
@@ -186,6 +196,7 @@ let onRacklist = function () {
     method: "POST",
     body: JSON.stringify({
       id: route.params.id,
+      typ: typ.value,
     }),
     headers: {
       Authorization: "Bearer: " + localStorage.getItem("token"),

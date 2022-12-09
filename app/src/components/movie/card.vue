@@ -6,7 +6,9 @@
         :src="'https://image.tmdb.org/t/p/original' + item.backdrop_path"
         class="mb-2"
     /></router-link>
-    <h2 class="mb-2 font-bold">{{ item.original_title }}</h2>
+    <h2 class="mb-2 font-bold">
+      {{ item.original_title }} <span class="font-normal">({{props.typ}})</span>
+    </h2>
     <p class="text-sm" v-if="item.overview">
       {{ item.overview.slice(0, 100) }} ...
     </p>
@@ -29,6 +31,10 @@ const props = defineProps({
   identifier: {
     require: true,
     type: Number,
+  },
+  typ: {
+    require: true,
+    typ: String,
   },
 });
 

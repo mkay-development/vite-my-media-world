@@ -1,14 +1,13 @@
 <template>
-  <div class="grid grid-cols-6 items" v-for="(item, index) in items">
-    <movie-card
-      v-if="item.tmdb_typ == 'movie'"
-      :identifier="item.tmdb_id"
-      class="col-span-6 md:col-span-2"
-    ></movie-card>
-    <series-card
-      v-if="item.tmdb_typ == 'series'"
-      class="col-span-6 md:col-span-2"
-    ></series-card>
+  <div class="grid grid-cols-6 gap-3">
+    <div class="col-span-6 md:col-span-2" v-for="(item, index) in items">
+      <movie-card
+        v-if="item.tmdb_typ == 'movie'"
+        :identifier="item.tmdb_id"
+        :typ="item.typ"
+      ></movie-card>
+      <series-card v-if="item.tmdb_typ == 'series'"></series-card>
+    </div>
   </div>
 </template>
 
