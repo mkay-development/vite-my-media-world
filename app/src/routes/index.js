@@ -1,11 +1,19 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
 import Home from '../pages/home.vue';
+import Rack from '../pages/rack.vue';
 import Impressum from '../pages/impressum.vue';
+import Wishlist from '../pages/wishlist.vue';
+import MovieView from '../pages/movie/view.vue';
+import Login from '../pages/login.vue';
 
 const routes = [
   { path: '/', component: Home },
-  { path: '/impressum', component: Impressum }
+  { path: '/impressum', component: Impressum },
+  { path: '/rack', component: Rack },
+  { path: '/movie/:id', component: MovieView },
+  { path: '/login', component: Login },
+  { path: '/wishlist', component: Wishlist }
 ];
 
 export default createRouter({

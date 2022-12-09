@@ -30,7 +30,7 @@ app.component('fa', FontAwesomeIcon);
 app.use(routes);
 const pinia = createPinia();
 pinia.use(({ store }) => {
-  store.router = router;
+  store.router = routes;
 });
 app.use(pinia);
 app.mount('#app');
