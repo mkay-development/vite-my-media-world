@@ -7,14 +7,14 @@ import { createPinia } from 'pinia';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 /* import specific icons */
-import { faPlus, faEdit, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import plausible from './plugins/plausible';
 
-library.add(faEdit, faPlus, faBars);
+library.add(faEdit, faPlus, faBars, faTimes);
 
 const plausibleOptions = {
   domain: 'www.my-media-world.de',

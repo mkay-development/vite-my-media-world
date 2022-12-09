@@ -15,13 +15,15 @@
         >
           <fa icon="plus" />Add to Wishlist
         </div>
-        <div 
-        
+        <div v-else @click="removeToWishlist()" class="mt-2 text-sm"><fa icon="times" />Remove from Wishlist</div>
+        <div
           class="px-2 py-2 space-x-3 bg-gray-300 rounded-lg add-to-rack"
-          @click="addToRack()"
+          @click="addToRacklist()"
+          v-if="!isOnRacklist"
         >
           <fa icon="plus" />Add to Rack
         </div>
+        <div v-else class="mt-2 text-sm" @click="removeToRacklist()"><fa icon="times" />Remove from Rack</div>
       </div>
     </div>
     <img
@@ -54,6 +56,7 @@ import { ref, onMounted } from "vue";
 let item = ref({});
 let route = useRoute();
 let isOnWishlist = ref(false);
+let isOnRacklist = ref(false);
 
 let load = function () {
   fetch("https://backend.my-media.world/api/movie/" + route.params.id, {
@@ -72,6 +75,25 @@ let load = function () {
 };
 
 let addToWishlist = function () {
+  fetch("https://backend.my-media.world/api/wishlist/add", {
+    method: "POST",
+    body: JSON.stringify({
+      id: route.params.id,
+    }),
+    headers: {
+      Authorization: "Bearer: " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+};
+
+let addToRacklist = function () {
   fetch("https://backend.my-media.world/api/rack/add", {
     method: "POST",
     body: JSON.stringify({
@@ -91,7 +113,7 @@ let addToWishlist = function () {
 };
 
 let onWishlist = function () {
-  fetch("https://backend.my-media.world/api/rack/is-on-wishlist", {
+  fetch("https://backend.my-media.world/api/wishlist/ison", {
     method: "POST",
     body: JSON.stringify({
       id: route.params.id,
@@ -105,7 +127,26 @@ let onWishlist = function () {
       return response.json();
     })
     .then(function (data) {
-      isOnWishlist.value = data.isOnWishlist;
+      isOnWishlist.value = data.ison;
+    });
+};
+
+let onRacklist = function () {
+  fetch("https://backend.my-media.world/api/rack/ison", {
+    method: "POST",
+    body: JSON.stringify({
+      id: route.params.id,
+    }),
+    headers: {
+      Authorization: "Bearer: " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      isOnRacklist.value = data.ison;
     });
 };
 
@@ -116,5 +157,6 @@ let addToRack = function () {
 onMounted(function () {
   load();
   onWishlist();
+  onRacklist();
 });
 </script>
