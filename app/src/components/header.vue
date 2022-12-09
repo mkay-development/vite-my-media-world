@@ -24,10 +24,9 @@ import { useUserStore } from "@/store/user";
 import { onMounted } from "vue";
 let store = useUserStore();
 
-let { token, loggedin } = storeToRefs(store);
+let { loggedin } = storeToRefs(store);
 
 onMounted(function () {
   store.check();
-  // store.login('admin@jmartz.de', 'MK98killer');
 });
 </script>
