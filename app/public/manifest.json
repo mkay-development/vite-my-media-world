@@ -1,10 +1,10 @@
 {
-    "name": "PWA - Template",
-    "short_name": "PWA",
+    "name": "MY Media World",
+    "short_name": "MMW",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#1f6fed",
-    "description": "PWA template of MkaY-Development.de",
+    "description": "My Media World App of MkaY-Development.de",
     "icons": [{
       "src": "images/touch/homescreen48.png",
       "sizes": "48x48",
