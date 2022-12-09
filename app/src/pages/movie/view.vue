@@ -8,10 +8,18 @@
         </h2>
       </div>
       <div class="flex space-x-3 actions">
-        <div class="px-2 py-2 space-x-3 bg-gray-300 rounded-lg add-to-rack" @click="addToWishlist()">
+        <div
+          class="px-2 py-2 space-x-3 bg-gray-300 rounded-lg add-to-rack"
+          @click="addToWishlist()"
+          v-if="!isOnWishlist"
+        >
           <fa icon="plus" />Add to Wishlist
         </div>
-        <div class="px-2 py-2 space-x-3 bg-gray-300 rounded-lg add-to-rack" @click="addToRack()">
+        <div 
+        
+          class="px-2 py-2 space-x-3 bg-gray-300 rounded-lg add-to-rack"
+          @click="addToRack()"
+        >
           <fa icon="plus" />Add to Rack
         </div>
       </div>
@@ -45,6 +53,7 @@ import { ref, onMounted } from "vue";
 
 let item = ref({});
 let route = useRoute();
+let isOnWishlist = ref(false);
 
 let load = function () {
   fetch("https://backend.my-media.world/api/movie/" + route.params.id, {
@@ -62,15 +71,50 @@ let load = function () {
     });
 };
 
-let addToWishlist = function(){
-    console.log(route.params.id);
-}
+let addToWishlist = function () {
+  fetch("https://backend.my-media.world/api/rack/add", {
+    method: "POST",
+    body: JSON.stringify({
+      id: route.params.id,
+    }),
+    headers: {
+      Authorization: "Bearer: " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+};
 
-let addToRack = function(){
-    console.log(route.params.id);
-}
+let onWishlist = function () {
+  fetch("https://backend.my-media.world/api/rack/is-on-wishlist", {
+    method: "POST",
+    body: JSON.stringify({
+      id: route.params.id,
+    }),
+    headers: {
+      Authorization: "Bearer: " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      isOnWishlist.value = data.isOnWishlist;
+    });
+};
+
+let addToRack = function () {
+  console.log(route.params.id);
+};
 
 onMounted(function () {
   load();
+  onWishlist();
 });
 </script>
