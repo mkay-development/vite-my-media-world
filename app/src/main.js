@@ -17,7 +17,7 @@ import plausible from './plugins/plausible';
 library.add(faEdit, faPlus, faBars, faTimes);
 
 const plausibleOptions = {
-  domain: 'www.my-media-world.de',
+  domain: 'www.my-media.world.de',
   apiHost: 'https://tracking.jmartz.gmbh',
   hashMode: false,
   trackLocalhost: false

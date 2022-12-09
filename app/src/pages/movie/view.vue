@@ -15,7 +15,9 @@
         >
           <fa icon="plus" />Add to Wishlist
         </div>
-        <div v-else @click="removeToWishlist()" class="mt-2 text-sm"><fa icon="times" />Remove from Wishlist</div>
+        <div v-else @click="removeFromWishlist()" class="mt-2 text-sm">
+          <fa icon="times" />Remove from Wishlist
+        </div>
         <div
           class="px-2 py-2 space-x-3 bg-gray-300 rounded-lg add-to-rack"
           @click="addToRacklist()"
@@ -23,7 +25,13 @@
         >
           <fa icon="plus" />Add to Rack
         </div>
-        <div v-else class="mt-2 text-sm" @click="removeToRacklist()"><fa icon="times" />Remove from Rack</div>
+        <div v-else class="mt-2 text-sm" @click="removeFromRacklist()">
+          <fa icon="times" />Remove from Rack
+        </div>
+        <select v-model="typ">
+          <option value="br">Blue Ray</option>
+          <option value="dvd">DVD</option>
+        </select>
       </div>
     </div>
     <img
@@ -57,6 +65,7 @@ let item = ref({});
 let route = useRoute();
 let isOnWishlist = ref(false);
 let isOnRacklist = ref(false);
+let typ = ref('dvd');
 
 let load = function () {
   fetch("https://backend.my-media.world/api/movie/" + route.params.id, {
@@ -90,6 +99,46 @@ let addToWishlist = function () {
     })
     .then(function (data) {
       console.log(data);
+      isOnWishlist.value = true;
+    });
+};
+
+let removeFromRacklist = function () {
+  fetch("https://backend.my-media.world/api/rack/remove", {
+    method: "POST",
+    body: JSON.stringify({
+      id: route.params.id,
+    }),
+    headers: {
+      Authorization: "Bearer: " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      isOnRacklist.value = false;
+    });
+};
+
+let removeFromWishlist = function () {
+  fetch("https://backend.my-media.world/api/wishlist/remove", {
+    method: "POST",
+    body: JSON.stringify({
+      id: route.params.id,
+    }),
+    headers: {
+      Authorization: "Bearer: " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      isOnWishlist.value = false;
     });
 };
 
@@ -109,6 +158,7 @@ let addToRacklist = function () {
     })
     .then(function (data) {
       console.log(data);
+      isOnRacklist.value = true;
     });
 };
 
@@ -148,10 +198,6 @@ let onRacklist = function () {
     .then(function (data) {
       isOnRacklist.value = data.ison;
     });
-};
-
-let addToRack = function () {
-  console.log(route.params.id);
 };
 
 onMounted(function () {
