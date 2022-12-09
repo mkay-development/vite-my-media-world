@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { onUpdated, ref, watch } from "vue";
 import movieCard from "@/components/movie/card.vue";
 
 let search = ref("");

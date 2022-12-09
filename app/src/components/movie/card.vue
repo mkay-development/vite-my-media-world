@@ -38,6 +38,18 @@ const props = defineProps({
   }
 });
 
+function debounce(func, timeout = 300){
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
+}
+
+onUpdated(function(){
+  debounce(load());
+});
+
 const load = function () {
   if (localStorage.getItem('movie-' + props.identifier) != null) {
     item.value = JSON.parse(localStorage.getItem('movie-' + props.identifier));
