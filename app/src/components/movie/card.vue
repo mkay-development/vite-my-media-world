@@ -7,7 +7,8 @@
         class="mb-2"
     /></router-link>
     <h2 class="mb-2 font-bold">
-      {{ item.original_title }} <span class="font-normal">({{props.typ}})</span>
+      {{ item.original_title }}
+      <span class="font-normal">({{ props.typ }})</span>
     </h2>
     <p class="text-sm" v-if="item.overview">
       {{ item.overview.slice(0, 100) }} ...
@@ -23,44 +24,36 @@
 </template>
 
 <script setup>
-import { onMounted, onUpdated, ref } from 'vue';
+import { onMounted, watch, ref } from "vue";
 
 const item = ref({});
 
 const props = defineProps({
   identifier: {
     require: true,
-    type: Number
+    type: Number,
   },
   typ: {
     require: true,
-    typ: String
-  }
+    typ: String,
+  },
 });
 
-function debounce(func, timeout = 300){
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => { func.apply(this, args); }, timeout);
-  };
-}
-
-onUpdated(function(){
-  debounce(load());
+watch(() => props.identifier, function () {
+ load();
 });
 
 const load = function () {
-  if (localStorage.getItem('movie-' + props.identifier) != null) {
-    item.value = JSON.parse(localStorage.getItem('movie-' + props.identifier));
+  if (localStorage.getItem("movie-" + props.identifier) != null) {
+    item.value = JSON.parse(localStorage.getItem("movie-" + props.identifier));
   } else {
-    fetch('https://backend.my-media.world/api/movie/' + props.identifier, {
-      method: 'GET',
+    fetch("https://backend.my-media.world/api/movie/" + props.identifier, {
+      method: "GET",
       headers: {
-        Authorization: 'Bearer: ' + localStorage.getItem('token'),
-        'Content-Type': 'application/json'
+        Authorization: "Bearer: " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
       },
-      item
+      item,
     })
       .then(function (response) {
         return response.json();
@@ -69,7 +62,7 @@ const load = function () {
         if (data.item) {
           item.value = data.item;
           localStorage.setItem(
-            'movie-' + props.identifier,
+            "movie-" + props.identifier,
             JSON.stringify(data.item)
           );
         }

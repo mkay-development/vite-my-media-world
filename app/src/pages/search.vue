@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="grid grid-cols-6">
-      <div class="col-span-6">
-        <input type="text" class="block" v-model="search" />
+      <div class="flex col-span-6 mb-3 space-x-3">
+        <label class="block px-2 py-2 bg-gray-400">Suche</label>
+        <input
+          type="text"
+          class="block px-2 py-2 bg-gray-300"
+          v-model="search"
+        />
       </div>
     </div>
     <div class="grid grid-cols-6 gap-3 results">
@@ -17,7 +22,7 @@
 </template>
 
 <script setup>
-import { onUpdated, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import movieCard from "@/components/movie/card.vue";
 
 let search = ref("");
