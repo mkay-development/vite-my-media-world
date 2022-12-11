@@ -14,7 +14,7 @@
         <li v-if="loggedin">
           <router-link to="/search">Search</router-link>
         </li>
-        <li v-if="loggedin">Logout</li>
+        <li v-if="loggedin"><router-link to="/logout">Logout</router-link></li>
         <li v-else><router-link to="/login">Login</router-link></li>
       </ul>
       <ul class="flex mobile-nav md:hidden">

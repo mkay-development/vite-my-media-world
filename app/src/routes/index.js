@@ -6,6 +6,7 @@ import Impressum from '../pages/impressum.vue';
 import Wishlist from '../pages/wishlist.vue';
 import MovieView from '../pages/movie/view.vue';
 import Login from '../pages/login.vue';
+import Logout from '../pages/logout.vue';
 import Search from '../pages/search.vue';
 
 const routes = [
@@ -14,6 +15,7 @@ const routes = [
   { path: '/rack', component: Rack },
   { path: '/movie/:id', component: MovieView },
   { path: '/login', component: Login },
+  { path: '/logout', component: Logout },
   { path: '/wishlist', component: Wishlist },
   { path: '/search', component: Search }
 ];
