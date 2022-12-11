@@ -19,7 +19,7 @@
           v-model="password"
         />
       </div>
-      <div class="actions"><button @click.prevent="submit()">Abschicken</button></div>
+      <div class="actions"><button class="w-full px-2 py-2 mt-3 text-center bg-gray-400" @click.prevent="submit()">Abschicken</button></div>
     </div>
   </div>
 </template>
