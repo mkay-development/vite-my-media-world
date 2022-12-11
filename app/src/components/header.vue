@@ -26,7 +26,7 @@
     class="w-full px-2 py-2 mt-3 text-center text-black bg-gray-400 vc-nav-content md:hidden"
     :class="{ hidden: !open }"
   >
-    <div class="grid grid-cols-6">
+    <div class="grid grid-cols-6 gap-3">
       <div class="col-span-2">
         <router-link to="/rack">Schrank</router-link>
       </div>
